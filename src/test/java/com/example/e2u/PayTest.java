@@ -1,5 +1,11 @@
 package com.example.e2u;
 
+import com.example.e2u.domain.Card;
+import com.example.e2u.domain.Pay;
+import com.example.e2u.domain.PayReceipt;
+import com.example.e2u.domain.Product;
+import com.example.e2u.service.ManualPay;
+import com.example.e2u.service.Refund;
 import com.google.gson.Gson;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +47,25 @@ class PayTest {
 
     String result = new ManualPay()
         .approval(payKey, pay);
+
+    System.out.println(result);
+  }
+
+  @DisplayName("결제 취소")
+  @Test
+  void refund() throws Exception {
+    String payKey = "test_pay_key"; // TODO: 온라인 결제 키
+    PayReceipt payReceipt = new PayReceipt();
+
+    payReceipt.trxType = "ONTR";
+    payReceipt.tmnId = "";
+    payReceipt.trackId = "TEST_ORDER_NUMBER"; // TODO: 주문 번호
+
+    payReceipt.amount = 1000;
+    payReceipt.rootTrxId = "T220808429614"; // TODO: 결제 거래 번호
+
+    String result = new Refund()
+        .request(payKey, payReceipt);
 
     System.out.println(result);
   }

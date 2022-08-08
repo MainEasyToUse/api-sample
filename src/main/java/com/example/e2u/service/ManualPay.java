@@ -1,5 +1,6 @@
-package com.example.e2u;
+package com.example.e2u.service;
 
+import com.example.e2u.domain.Pay;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;

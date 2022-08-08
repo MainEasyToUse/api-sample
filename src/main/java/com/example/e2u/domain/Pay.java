@@ -1,4 +1,4 @@
-package com.example.e2u;
+package com.example.e2u.domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.example.e2u;
+package com.example.e2u.domain;
 
 public class Product {
   public String prodId;
