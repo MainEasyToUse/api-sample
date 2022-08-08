@@ -21,7 +21,7 @@ public class ManualPay {
   private static final String CONNECTION = "Connection";
   private static final String REQUEST_METHOD = "POST";
 
-    private static final String PAY_URL = "https://api.e2u.kr/api/pay";
+  private static final String PAY_URL = "https://api.e2u.kr/api/pay";
 
   public String approval(String payKey, Pay pay) throws Exception {
     HttpURLConnection connection = getConnection(new URL(PAY_URL), payKey);

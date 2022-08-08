@@ -14,10 +14,12 @@ import org.junit.jupiter.api.Test;
 
 class PayTest {
 
+  private static final String PAY_KEY = "test_pay_key";
+
   @DisplayName("수기 결제 (비인증)")
   @Test
   void pay_without_auth() throws Exception {
-    String payKey = "test_pay_key"; // TODO: 온라인 결제 키
+    String payKey = PAY_KEY; // TODO: 온라인 결제 키
     Pay pay = new Pay();
 
     pay.trxType = "ONTR";
@@ -54,7 +56,7 @@ class PayTest {
   @DisplayName("결제 취소")
   @Test
   void refund() throws Exception {
-    String payKey = "test_pay_key"; // TODO: 온라인 결제 키
+    String payKey = PAY_KEY; // TODO: 온라인 결제 키
     PayReceipt payReceipt = new PayReceipt();
 
     payReceipt.trxType = "ONTR";
@@ -70,6 +72,7 @@ class PayTest {
     System.out.println(result);
   }
 
+  @DisplayName("결제 응답값 확인 예제")
   @Test
   void response() {
     Map<String, Map<String, Object>> map = new HashMap<>();

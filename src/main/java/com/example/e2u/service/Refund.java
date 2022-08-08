@@ -1,6 +1,5 @@
 package com.example.e2u.service;
 
-import com.example.e2u.domain.Pay;
 import com.example.e2u.domain.PayReceipt;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
@@ -22,7 +21,7 @@ public class Refund {
   private static final String CONNECTION = "Connection";
   private static final String REQUEST_METHOD = "POST";
 
-    private static final String PAY_URL = "https://api.e2u.kr/api/refund";
+  private static final String PAY_URL = "https://api.e2u.kr/api/refund";
 
   public String request(String payKey, PayReceipt payReceipt) throws Exception {
     HttpURLConnection connection = getConnection(new URL(PAY_URL), payKey);
