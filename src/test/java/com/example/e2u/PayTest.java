@@ -1,5 +1,8 @@
 package com.example.e2u;
 
+import com.google.gson.Gson;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +10,7 @@ class PayTest {
 
   @DisplayName("수기 결제 (비인증)")
   @Test
-  void pay() throws Exception {
+  void pay_without_auth() throws Exception {
     String payKey = "test_pay_key"; // TODO: 온라인 결제 키
     Pay pay = new Pay();
 
@@ -36,7 +39,26 @@ class PayTest {
 
     pay.productList.add(product);
 
-    new ManualPay()
+    String result = new ManualPay()
         .approval(payKey, pay);
+
+    System.out.println(result);
+  }
+
+  @Test
+  void response() {
+    Map<String, Map<String, Object>> map = new HashMap<>();
+
+    Map<String, Map<String, Object>> responseToMap = new Gson().fromJson(
+        "{\"result\": {\"resultCd\": \"0000\",\"resultMsg\": \"정상\",\"advanceMsg\": \"정상승인\",\"create\": \"20220808170815\"},\"pay\": {\"authCd\": \"00000000\",\"card\": {\"cardId\": \"1111111111111\",\"installment\": 0,\"bin\": \"4123123\",\"last4\": \"1111\",\"issuer\": \"신한카드\",\"cardType\": \"신용\",\"acquirer\": \"신한\"},\"trxDate\": \"20220808170814\",\"trxId\": \"T220808429614\",\"trxType\": \"ONTR\",\"tmnId\": \"test_terminal\",\"trackId\": \"20220808_1234\",\"amount\": 1000,\"udf1\": \"User Define Field 1\",\"udf2\": \"User Define Field 2\"}}",
+        map.getClass());
+
+    Map<String, Object> result = responseToMap.get("result");
+    Map<String, Object> pay = responseToMap.get("pay");
+
+    System.out.println(result.get("resultCd"));
+    System.out.println(result.get("resultMsg"));
+
+    System.out.println(pay.get("trxId"));
   }
 }

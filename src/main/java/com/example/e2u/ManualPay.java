@@ -22,15 +22,17 @@ public class ManualPay {
 
     private static final String PAY_URL = "https://api.e2u.kr/api/pay";
 
-  public void approval(String payKey, Pay pay) throws Exception {
+  public String approval(String payKey, Pay pay) throws Exception {
     HttpURLConnection connection = getConnection(new URL(PAY_URL), payKey);
-
+    String result = "";
     try {
       request(connection, new Gson().toJson(wrapData(pay)));
-      response(connection);
+      result = response(connection);
     } finally {
       connection.disconnect();
     }
+
+    return result;
   }
 
   private Map<String, Pay> wrapData(Pay pay) {
@@ -49,7 +51,7 @@ public class ManualPay {
     }
   }
 
-  private void response(HttpURLConnection connection) throws IOException {
+  private String response(HttpURLConnection connection) throws IOException {
     try (BufferedReader br = new BufferedReader(
         new InputStreamReader(connection.getInputStream(), CHARSET_UTF_8))) {
       StringBuilder response = new StringBuilder();
@@ -59,7 +61,7 @@ public class ManualPay {
         response.append(responseLine.trim());
       }
 
-      System.out.println("response: " + response.toString());
+      return response.toString();
     }
   }
 
